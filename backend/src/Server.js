@@ -2,13 +2,13 @@ import express, { json } from 'express';
 
 import './database/connectionDB';
 
-import routes from './routes';
+import Routes from './Routes';
 
 class Server {
   constructor() {
     this.server = express();
 
-    this.middleware();
+    this.middlewares();
     this.routes();
 
     this.upServer();
@@ -18,12 +18,12 @@ class Server {
     this.server.listen(3333);
   }
 
-  middleware() {
+  middlewares() {
     this.server.use(json());
   }
 
   routes() {
-    this.server.use(routes);
+    this.server.use(Routes);
   }
 }
 
