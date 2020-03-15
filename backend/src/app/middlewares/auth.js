@@ -21,6 +21,7 @@ export default async (req, res, next) => {
     if (user.administrator === false) {
       return res.status(401).json('You are not an administrator!');
     }
+    req.userId = decoded.id;
 
     return next();
   } catch (err) {

@@ -21,12 +21,24 @@ class RecipientController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(401).json('Validation is failed!');
+      return res.status(401).json({ error: 'Validation is failed!' });
     }
 
     const recipient = req.body;
 
     await Recipient.create(recipient);
+
+    return res.json(recipient);
+  }
+
+  static async update(req, res) {
+    const recipient = await Recipient.findByPk(req.params.id);
+
+    if (!recipient) {
+      return res.status(400).json({ error: 'Recipient not found!' });
+    }
+
+    await recipient.update(req.body);
 
     return res.json(recipient);
   }

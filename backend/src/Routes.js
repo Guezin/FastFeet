@@ -17,6 +17,7 @@ class Route {
     this.createRecipient();
     this.getRecipients();
     this.createRecipient();
+    this.updateRecipient();
   }
 
   // SIGN IN
@@ -40,6 +41,10 @@ class Route {
 
   createRecipient() {
     return this.route.post('/recipients', RecipientController.store);
+  }
+
+  updateRecipient() {
+    return this.route.put('/recipients/:id', RecipientController.update);
   }
 }
 

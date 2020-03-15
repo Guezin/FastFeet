@@ -15,7 +15,7 @@ class LoginController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(401).json('Validation is failed!');
+      return res.status(401).json({ error: 'Validation is failed!' });
     }
 
     const { email, password } = req.body;
@@ -24,11 +24,17 @@ class LoginController {
     });
 
     if (!user) {
-      return res.status(401).json('Email or password is invalid!');
+      return res.status(401).json({ error: 'Email or password is invalid!' });
     }
 
     if (password && !(await user.checkPassword(password))) {
-      return res.status(401).json('Email or password is invalid!');
+      return res.status(401).json({ error: 'Email or password is invalid!' });
+    }
+
+    if (user.administrator === false) {
+      return res
+        .status(401)
+        .json({ error: 'You do not have administrator permission!' });
     }
     const { id, name } = user;
 
