@@ -9,6 +9,7 @@ import UserController from './app/controllers/UserController';
 import LoginController from './app/controllers/LoginController';
 import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
+import DeliveryManController from './app/controllers/DeliveryManController';
 
 class Route {
   constructor() {
@@ -18,13 +19,16 @@ class Route {
     this.login();
 
     this.middleware();
-    this.getUsers();
+    this.listUsers();
     this.createRecipient();
-    this.getRecipients();
+    this.listRecipients();
     this.createRecipient();
     this.updateRecipient();
     this.uploadFile();
-    this.getFiles();
+    this.listDeliveryMan();
+    this.createDeliveryMan();
+    this.updateDeliveryMan();
+    this.deleteDeliveryMan();
   }
 
   // SIGN IN
@@ -37,12 +41,12 @@ class Route {
   }
 
   // USER
-  getUsers() {
+  listUsers() {
     return this.route.get('/users', UserController.index);
   }
 
   // RECIPIENT
-  getRecipients() {
+  listRecipients() {
     return this.route.get('/recipients', RecipientController.index);
   }
 
@@ -63,8 +67,21 @@ class Route {
     );
   }
 
-  getFiles() {
-    return this.route.get('/files', FileController.index);
+  // DELIVERYMAN
+  listDeliveryMan() {
+    return this.route.get('/deliveryman', DeliveryManController.index);
+  }
+
+  createDeliveryMan() {
+    return this.route.post('/deliveryman', DeliveryManController.store);
+  }
+
+  updateDeliveryMan() {
+    return this.route.put('/deliveryman/:id', DeliveryManController.update);
+  }
+
+  deleteDeliveryMan() {
+    return this.route.delete('/deliveryman/:id', DeliveryManController.delete);
   }
 }
 
