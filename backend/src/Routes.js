@@ -10,6 +10,7 @@ import LoginController from './app/controllers/LoginController';
 import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import DeliveryManController from './app/controllers/DeliveryManController';
+import OrderController from './app/controllers/OrderController';
 
 class Route {
   constructor() {
@@ -19,16 +20,22 @@ class Route {
     this.login();
 
     this.middleware();
+
     this.listUsers();
+
     this.createRecipient();
     this.listRecipients();
     this.createRecipient();
     this.updateRecipient();
+
     this.uploadFile();
+
     this.listDeliveryMan();
     this.createDeliveryMan();
     this.updateDeliveryMan();
     this.deleteDeliveryMan();
+
+    this.createOrder();
   }
 
   // SIGN IN
@@ -82,6 +89,11 @@ class Route {
 
   deleteDeliveryMan() {
     return this.route.delete('/deliveryman/:id', DeliveryManController.delete);
+  }
+
+  // ORDER
+  createOrder() {
+    return this.route.post('/orders', OrderController.store);
   }
 }
 

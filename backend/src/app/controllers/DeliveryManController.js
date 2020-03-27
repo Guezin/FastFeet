@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import DeliveryMan from '../models/DeliveryMan';
+import File from '../models/File';
 
 class DeliveryManController {
   static async index(req, res) {
@@ -8,7 +9,8 @@ class DeliveryManController {
       attributes: ['id', 'name', 'email'],
       include: [
         {
-          association: 'avatar',
+          model: File,
+          as: 'avatar',
           attributes: ['id', 'url', 'name', 'path'],
         },
       ],

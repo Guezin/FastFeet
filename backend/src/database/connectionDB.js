@@ -6,9 +6,10 @@ import User from '../app/models/User';
 import Recipient from '../app/models/Recipient';
 import File from '../app/models/File';
 import DeliveryMan from '../app/models/DeliveryMan';
+import Order from '../app/models/Order';
 
 function connectionDB() {
-  const models = [User, Recipient, File, DeliveryMan];
+  const models = [User, Recipient, File, DeliveryMan, Order];
   const connection = new Sequelize(configDatabase);
 
   return models
