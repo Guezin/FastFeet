@@ -22,6 +22,9 @@ class Route {
     this.middleware();
 
     this.listUsers();
+    this.createUser();
+    this.upgradeUser();
+    this.deleteUser();
 
     this.createRecipient();
     this.listRecipients();
@@ -50,6 +53,18 @@ class Route {
   // USER
   listUsers() {
     return this.route.get('/users', UserController.index);
+  }
+
+  createUser() {
+    return this.route.post('/users', UserController.store);
+  }
+
+  upgradeUser() {
+    return this.route.put('/users/:id', UserController.upgrade);
+  }
+
+  deleteUser() {
+    return this.route.delete('/users/:id/delete', UserController.delete);
   }
 
   // RECIPIENT
