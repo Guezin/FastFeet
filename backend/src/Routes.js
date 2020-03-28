@@ -30,6 +30,7 @@ class Route {
     this.listRecipients();
     this.createRecipient();
     this.updateRecipient();
+    this.deleteRecipient();
 
     this.uploadFile();
 
@@ -78,6 +79,13 @@ class Route {
 
   updateRecipient() {
     return this.route.put('/recipients/:id', RecipientController.update);
+  }
+
+  deleteRecipient() {
+    return this.route.delete(
+      '/recipients/:id/delete',
+      RecipientController.delete
+    );
   }
 
   // FILE
