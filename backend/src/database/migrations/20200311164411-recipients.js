@@ -25,7 +25,7 @@ module.exports = {
 
       complement: {
         type: Sequelize.STRING,
-        defaultValue: false,
+        allowNull: true,
       },
 
       state: {

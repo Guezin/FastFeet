@@ -40,6 +40,8 @@ class Route {
 
     this.listOrders();
     this.createOrder();
+    this.updateOrder();
+    this.deleteOrder();
   }
 
   // SIGN IN
@@ -121,6 +123,14 @@ class Route {
 
   createOrder() {
     return this.route.post('/orders', OrderController.store);
+  }
+
+  updateOrder() {
+    return this.route.put('/orders/:id/update', OrderController.update);
+  }
+
+  deleteOrder() {
+    return this.route.delete('/orders/:id/delete', OrderController.delete);
   }
 }
 

@@ -13,10 +13,20 @@ class OrderController {
         {
           model: Recipient,
           as: 'recipient',
+          attributes: [
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'zip_code',
+          ],
         },
         {
           model: DelivaryMan,
           as: 'deliveryman',
+          attributes: ['name', 'email'],
         },
       ],
     });
@@ -69,6 +79,40 @@ class OrderController {
       },
     });
     return res.json(order);
+  }
+
+  static async update(req, res) {
+    const { product, recipient_id, deliveryman_id } = req.body;
+    const orderExists = await Order.findByPk(req.params.id);
+
+    if (!orderExists) {
+      return res.status(400).json({ error: 'Order not found!' });
+    }
+
+    const order = await orderExists.update({
+      product,
+      recipient_id,
+      deliveryman_id,
+    });
+
+    return res.json({
+      message: 'Order updated successfully!',
+      order,
+    });
+  }
+
+  static async delete(req, res) {
+    const orderExists = await Order.findByPk(req.params.id);
+
+    if (!orderExists) {
+      return res.status(400).json({ error: 'Order not found!' });
+    }
+
+    await orderExists.destroy();
+
+    return res.json({
+      message: 'Order deleted successfully',
+    });
   }
 }
 
