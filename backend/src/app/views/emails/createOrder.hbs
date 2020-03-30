@@ -1,0 +1,18 @@
+<strong>Olá, {{ deliveryman }}</strong>
+<p>Temos uma entrega para você, segue os datalhes abaixo:</p>
+  <h3>Produto</h3>
+  <p>Nome do produto: <strong>{{ product }}</strong> <br />
+    <small>Já está disponível para retirada.</small>
+  </p>
+
+
+  <h3>Destinatário</h3>
+  <p>
+    <strong>Cliente: </strong> {{ name }} <br />
+    <strong>Cidade: </strong> {{ city }} <br />
+    <strong>Endereço: </strong> {{ street }}, Nº{{ number }} <br />
+    <strong>Cep: </strong> {{ zip_code }} - {{ state }} <br />
+  </p>
+  <br />
+
+<p><small>As retiradas só podem ser feitas entre às 08:00 e 18:00h.</small></p> <br />

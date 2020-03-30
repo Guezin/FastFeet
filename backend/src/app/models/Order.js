@@ -31,7 +31,7 @@ class Order extends Model {
     });
     this.belongsTo(models.DeliveryMan, {
       foreignKey: 'deliveryman_id',
-      as: 'delivery',
+      as: 'deliveryman',
     });
   }
 }

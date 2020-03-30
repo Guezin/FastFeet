@@ -28,7 +28,6 @@ class Route {
 
     this.createRecipient();
     this.listRecipients();
-    this.createRecipient();
     this.updateRecipient();
     this.deleteRecipient();
 
@@ -39,6 +38,7 @@ class Route {
     this.updateDeliveryMan();
     this.deleteDeliveryMan();
 
+    this.listOrders();
     this.createOrder();
   }
 
@@ -115,6 +115,10 @@ class Route {
   }
 
   // ORDER
+  listOrders() {
+    return this.route.get('/orders', OrderController.index);
+  }
+
   createOrder() {
     return this.route.post('/orders', OrderController.store);
   }
