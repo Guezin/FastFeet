@@ -4,6 +4,7 @@ import multer from 'multer';
 import configMulter from './config/multer';
 
 import authMiddleware from './app/middlewares/auth';
+import checkDeliveryToken from './lib/checkDeliveryToken';
 
 import UserController from './app/controllers/UserController';
 import LoginController from './app/controllers/LoginController';
@@ -11,6 +12,7 @@ import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import DeliveryManController from './app/controllers/DeliveryManController';
 import OrderController from './app/controllers/OrderController';
+import DeliveryManViewOrderController from './app/controllers/DeliveryManViewOrderController';
 
 class Route {
   constructor() {
@@ -18,6 +20,8 @@ class Route {
     this.upload = multer(configMulter);
 
     this.login();
+
+    this.listDeliveryManViewOrder();
 
     this.middleware();
 
@@ -131,6 +135,16 @@ class Route {
 
   deleteOrder() {
     return this.route.delete('/orders/:id/delete', OrderController.delete);
+  }
+
+  // DELIVERYMAN ORDER
+
+  listDeliveryManViewOrder() {
+    return this.route.get(
+      '/deliveryman/:id/deliveries',
+      (req, res, next) => checkDeliveryToken(req, res, next),
+      DeliveryManViewOrderController.index
+    );
   }
 }
 

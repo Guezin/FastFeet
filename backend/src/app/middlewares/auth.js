@@ -12,9 +12,8 @@ export default async (req, res, next) => {
     return res.status(400).json('Token not provided!');
   }
 
-  const [, token] = bearerToken.split(' ');
-
   try {
+    const [, token] = bearerToken.split(' ');
     const decoded = await promisify(JWT.verify)(token, authConfig.secret);
     const user = await User.findByPk(decoded.id);
 
