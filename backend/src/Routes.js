@@ -13,6 +13,7 @@ import FileController from './app/controllers/FileController';
 import DeliveryManController from './app/controllers/DeliveryManController';
 import OrderController from './app/controllers/OrderController';
 import DeliveryManViewOrderController from './app/controllers/DeliveryManViewOrderController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 class Route {
   constructor() {
@@ -22,6 +23,8 @@ class Route {
     this.login();
 
     this.listDeliveryManViewOrder();
+
+    this.createDeliveryProblem();
 
     this.middleware();
 
@@ -46,6 +49,11 @@ class Route {
     this.createOrder();
     this.updateOrder();
     this.deleteOrder();
+
+    this.listAllProblemsWithDeliveries();
+    this.listAllProblemsOfDelivery();
+
+    this.createCancelDelivery();
   }
 
   // SIGN IN
@@ -138,12 +146,42 @@ class Route {
   }
 
   // DELIVERYMAN ORDER
-
   listDeliveryManViewOrder() {
     return this.route.get(
       '/deliveryman/:id/deliveries',
       (req, res, next) => checkDeliveryToken(req, res, next),
       DeliveryManViewOrderController.index
+    );
+  }
+
+  // DELIVERY PROBLEM
+  createDeliveryProblem() {
+    return this.route.post(
+      '/delivery/:id/problems',
+      (req, res, next) => checkDeliveryToken(req, res, next),
+      DeliveryProblemController.store
+    );
+  }
+
+  listAllProblemsWithDeliveries() {
+    return this.route.get(
+      '/deliveries/with-problems',
+      DeliveryProblemController.index
+    );
+  }
+
+  listAllProblemsOfDelivery() {
+    return this.route.get(
+      '/delivery/:id/problems',
+      DeliveryProblemController.show
+    );
+  }
+
+  // CANCEL DELIVERY
+  createCancelDelivery() {
+    return this.route.delete(
+      '/problem/:id/cancel-delivery',
+      DeliveryProblemController.delete
     );
   }
 }

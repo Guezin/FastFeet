@@ -31,11 +31,6 @@ class LoginController {
       return res.status(401).json({ error: 'Email or password is invalid!' });
     }
 
-    if (user.administrator === false) {
-      return res
-        .status(401)
-        .json({ error: 'You do not have administrator permission!' });
-    }
     const { id, name } = user;
 
     return res.json({

@@ -31,7 +31,7 @@ class DeliveryManController {
       return res.status(401).json({ error: 'Validation is failed!' });
     }
 
-    const { name, email, avatar_id } = req.body;
+    const { name, email } = req.body;
     const deliveryManExists = await DeliveryMan.findOne({ where: { email } });
 
     if (deliveryManExists) {
@@ -41,7 +41,6 @@ class DeliveryManController {
     const deliveryMan = await DeliveryMan.create({
       name,
       email,
-      avatar_id,
     });
 
     return res.json(deliveryMan);
